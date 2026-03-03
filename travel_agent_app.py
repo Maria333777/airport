@@ -78,7 +78,7 @@ def main(page: ft.Page):
             page.update()
 
     page.add(
-        ft.Text("🌍 GlobeNest Travel Agency", size=24),
+        ft.Text("Gran Malo Travel Agency", size=24),
         country_input,
         ft.ElevatedButton("Search Country", on_click=search_country),
         country_info,
