@@ -53,29 +53,57 @@ def main(page: ft.Page):
         page.update()
 
     def create_plan(e):
+        if client_input.value == "":
+            cost_info.value = "Write the client name first."
+            page.update()
+            return
+
         current_plan["plan"] = TravelPlan(client_input.value)
+        cost_info.value = "Plan created!"
+        page.update()
 
     def add_country(e):
-        if selected_country["data"] and current_plan["plan"]:
-            current_plan["plan"].add_country(
-                selected_country["data"]["official_name"],
-                days_input.value,
-                date_input.value,
-                notes_input.value
-            )
+        if current_plan["plan"] == None:
+            cost_info.value = "Make a plan first!"
+            page.update()
+            return
+
+        if selected_country["data"] == None:
+            cost_info.value = "Search a country first!"
+            page.update()
+            return
+
+        current_plan["plan"].add_country(
+           selected_country["data"]["official_name"],
+           int(days_input.value),
+           date_input.value,
+           notes_input.value
+        )
+
+        cost_info.value = "Country added!"
+        page.update()
 
     def calculate_cost(e):
-        if current_plan["plan"]:
-            total = calculate_total_cost(current_plan["plan"].countries)
-            current_plan["plan"].total_cost = total
-            cost_info.value = f"Total Estimated Cost: ${total}"
+        if current_plan["plan"] == None:
+            cost_info.value = "No plan yet!"
             page.update()
+            return
+
+        total = calculate_total_cost(current_plan["plan"].countries)
+        current_plan["plan"].total_cost = total
+
+        cost_info.value = "Total cost is $" + str(total)
+        page.update()
 
     def save_current_plan(e):
-        if current_plan["plan"]:
-            save_plan(current_plan["plan"])
-            cost_info.value += "\nPlan saved!"
+        if current_plan["plan"] == None:
+            cost_info.value = "Nothing to save!"
             page.update()
+            return
+
+        save_plan(current_plan["plan"])
+        cost_info.value = cost_info.value + "\nSaved!"
+        page.update()
 
     page.add(
         ft.Text("Gran Malo Travel Agency", size=24),
