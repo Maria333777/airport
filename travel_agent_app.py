@@ -5,7 +5,7 @@ from cost_calculator import calculate_total_cost
 from storage import save_plan
 
 def main(page: ft.Page):
-    page.title = "GlobeNest Travel Agency"
+    page.title = "Gran Malo Travel Agency"
     page.scroll = "auto"
 
     selected_country = {"data": None}
