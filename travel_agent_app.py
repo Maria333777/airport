@@ -58,33 +58,47 @@ def main(page: ft.Page):
             page.update()
             return
 
-        current_plan["plan"] = TravelPlan(client_input.value)
+        current_plan["plan"] = TravelPlan()
+        current_plan["plan"].set_client_name(client_input.value)
+
         cost_info.value = "Plan created!"
         page.update()
 
     def add_country(e):
-        if current_plan["plan"] == None:
+        if current_plan["plan"] is None:
             cost_info.value = "Make a plan first!"
             page.update()
             return
 
-        if selected_country["data"] == None:
+        if selected_country["data"] is None:
             cost_info.value = "Search a country first!"
             page.update()
             return
 
+        if days_input.value == "":
+            cost_info.value = "Enter number of days!"
+            page.update()
+            return
+
+        try:
+            days = int(days_input.value)
+        except:
+            cost_info.value = "Days must be a number!"
+            page.update()
+            return
+
         current_plan["plan"].add_country(
-           selected_country["data"]["official_name"],
-           int(days_input.value),
-           date_input.value,
-           notes_input.value
+            selected_country["data"]["official_name"],
+            days,
+            date_input.value,
+            notes_input.value
         )
 
         cost_info.value = "Country added!"
         page.update()
 
     def calculate_cost(e):
-        if current_plan["plan"] == None:
+        if current_plan["plan"] is None:
             cost_info.value = "No plan yet!"
             page.update()
             return
@@ -96,13 +110,13 @@ def main(page: ft.Page):
         page.update()
 
     def save_current_plan(e):
-        if current_plan["plan"] == None:
+        if current_plan["plan"] is None:
             cost_info.value = "Nothing to save!"
             page.update()
             return
 
         save_plan(current_plan["plan"])
-        cost_info.value = cost_info.value + "\nSaved!"
+        cost_info.value += "\nSaved!"
         page.update()
 
     page.add(
@@ -123,6 +137,5 @@ def main(page: ft.Page):
         ft.ElevatedButton("Save Plan", on_click=save_current_plan),
         cost_info
     )
-
-
+    
 ft.app(target=main)
