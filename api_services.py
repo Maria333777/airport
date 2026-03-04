@@ -18,7 +18,8 @@ def get_country_data(country_name):
         "currencies": ", ".join(data.get("currencies", {}).keys()),
         "languages": ", ".join(data.get("languages", {}).values()),
         "timezones": ", ".join(data.get("timezones", [])),
-        "latlng": data.get("latlng", [0, 0])
+        "latlng": data.get("latlng", [0, 0]),
+        "flag": data["flags"]["png"]
     }
 
 def get_weather(lat, lon):
