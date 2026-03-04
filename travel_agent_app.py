@@ -20,7 +20,7 @@ def main(page: ft.Page):
     country_info = ft.Text()
     weather_info = ft.Text()
     cost_info = ft.Text()
-    flag_image = ft.Image(width=150)
+    flag_image = ft.Image(width=150, visible=False)
 
     def search_country(e):
         data = get_country_data(country_input.value)
@@ -32,6 +32,8 @@ def main(page: ft.Page):
 
         selected_country["data"] = data
         flag_image.src = data["flag"]
+        flag_image.visible = True
+        page.update()
 
         country_info.value = (
             f"Official Name: {data['official_name']}\n"
@@ -126,6 +128,7 @@ def main(page: ft.Page):
         country_input,
         ft.ElevatedButton("Search Country", on_click=search_country),
         country_info,
+        flag_image, 
         weather_info,
         ft.Divider(),
         ft.Text("Create Travel Plan", size=20),
