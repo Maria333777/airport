@@ -7,12 +7,16 @@ class TravelPlan:
 
     def set_client_name(self, name):
         self.client_name = name
+        self.countries = [] 
 
-    def add_country(self, country, days):
+    def add_country(self, country, days, start_date, notes):
         self.countries.append({
             "country": country,
-            "days": days
+            "days": days,
+            "start_date": start_date,
+            "notes": notes
         })
+    
 
     def set_dates(self, dates):
         self.dates = dates
