@@ -20,6 +20,7 @@ def main(page: ft.Page):
     country_info = ft.Text()
     weather_info = ft.Text()
     cost_info = ft.Text()
+    flag_image = ft.Image(width=150)
 
     def search_country(e):
         data = get_country_data(country_input.value)
@@ -30,6 +31,7 @@ def main(page: ft.Page):
             return
 
         selected_country["data"] = data
+        flag_image.src = data["flag"]
 
         country_info.value = (
             f"Official Name: {data['official_name']}\n"
@@ -114,8 +116,8 @@ def main(page: ft.Page):
             cost_info.value = "Nothing to save!"
             page.update()
             return
-
-        save_plan(current_plan["plan"])
+    
+        save_plan(current_plan["plan"].to_dict())
         cost_info.value += "\nSaved!"
         page.update()
 
@@ -137,5 +139,5 @@ def main(page: ft.Page):
         ft.ElevatedButton("Save Plan", on_click=save_current_plan),
         cost_info
     )
-    
+
 ft.app(target=main)
