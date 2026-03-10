@@ -1,2 +1,28 @@
 [
-    
+    {
+        "client_name": "jose",
+        "countries": [
+            {
+                "country": "Bolivarian Republic of Venezuela",
+                "days": 23,
+                "start_date": "2008-19-02",
+                "notes": "vamonos a venezela de cumplea\u00f1os numero 30"
+            }
+        ],
+        "dates": "",
+        "notes": ""
+    },
+    {
+        "client_name": "Braulio",
+        "countries": [
+            {
+                "country": "Republic of Ireland",
+                "days": 23,
+                "start_date": "2026-08-09",
+                "notes": "Hola, me voy de viaje"
+            }
+        ],
+        "dates": "",
+        "notes": ""
+    }
+]
